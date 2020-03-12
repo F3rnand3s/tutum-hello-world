@@ -5,6 +5,7 @@ apiVersion: v1
 metadata:
   name: helloworldservice # o nome do servico chama-se helloworldservice
 spec:
+  type: NodePort
   selector: # o selector serve para saber quais os pods que ele deve de "apontar"
     app: hello-world #neste caso vai estar a olhar para qualquer aplicação cujo o nome é "hello-world"
   ports:
@@ -17,7 +18,8 @@ spec:
       # Port accessible outisde cluster
       # nodeport is a port that is accessible from outside the cluster ou seja if i hit my master node 30001 i will be able to hit the targetport no qual esta faz forward para a pod com o nome da app na porta 8080
       nodePort: 30001
-  type: LoadBalancer 
+  # externalIPs:
+  #   - 192.168.110.145
 
 ---
 apiVersion: apps/v1
