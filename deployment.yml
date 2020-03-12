@@ -37,6 +37,6 @@ spec: # e as especificações são as seguintes:
       containers: #um container (essencialmente um array de yml containers?)
       - name: hello-world #o nome do container vai ser hello-world
         # image: f3rnand3s/tutum-hello-world:v1 # em que a imagem vai ser esta (vai fazer pull da imagem do Docker Hub) e vai percorrer essa imagem
-        image: f3nand3s/tutum-hello-world:v2 # em que a imagem vai ser esta (vai fazer pull da imagem do Docker Hub) e vai percorrer essa imagem
+        image: f3rnand3s/tutum-hello-world:v2 # em que a imagem vai ser esta (vai fazer pull da imagem do Docker Hub) e vai percorrer essa imagem
         ports:
         - containerPort: 8080 #a imagem vai percorrer na porta 80 dentro desse container
