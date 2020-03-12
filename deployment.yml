@@ -1,5 +1,4 @@
 #Este deployment contém duas partes.
-
 ---
 kind: Service # está a ser declarado um serviço para poder aceder aos deployments de fora do cluster
 apiVersion: v1
@@ -20,24 +19,6 @@ spec:
       nodePort: 30001
   type: LoadBalancer 
 
-# ---
-# apiVersion: extensions/v1beta1
-# kind: Deployment # nesta parte está a ser criado um deployment
-# metadata: 
-#   name: hello-world # com o nome de "hello-world"
-# spec: # e as especificações são as seguintes: 
-#   replicas: 5 # eu quero 5 copias
-#   template: 
-#     metadata: 
-#       labels: 
-#         app: hello-world # de um aplicação cujo o nome é "hello-world"
-#     spec: # no qual vai ter
-#       containers:  #um container (essencialmente um array de yml containers?)
-#         - name: hello-world #o nome do container vai ser hello-world
-#           image: f3rnand3s/tutum-hello-world # em que a imagem vai ser esta (vai fazer pull da imagem do Docker Hub) e vai percorrer essa imagem
-#           ports:
-#             - containerPort: 80 #a imagem vai percorrer na porta 80 dentro desse container
-
 ---
 apiVersion: apps/v1
 kind: Deployment # nesta parte está a ser criado um deployment
@@ -52,8 +33,8 @@ spec: # e as especificações são as seguintes:
     metadata:
       labels:
         app: hello-world # de um aplicação cujo o nome é "hello-world"
-    spec:
-      containers:
+    spec: # no qual vai ter
+      containers: #um container (essencialmente um array de yml containers?)
       - name: hello-world #o nome do container vai ser hello-world
         image: f3rnand3s/tutum-hello-world:v1 # em que a imagem vai ser esta (vai fazer pull da imagem do Docker Hub) e vai percorrer essa imagem
         ports:
