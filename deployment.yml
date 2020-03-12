@@ -1,35 +1,40 @@
+#Este deployment contém duas partes.
+
 ---
-kind: Service
+kind: Service # está a ser declarado um serviço para poder aceder aos deployments de fora do cluster
 apiVersion: v1
 metadata:
-  name: helloworldservice
+  name: helloworldservice # o nome do servico chama-se helloworldservice
 spec:
-  selector:
-    app: hello-world
+  selector: # o selector serve para saber quais os pods que ele deve de "apontar"
+    app: hello-world #neste caso vai estar a olhar para qualquer aplicação cujo o nome é "hello-world"
   ports:
     - protocol: "TCP"
       # Port accessible inside cluster
+      # the port is a port to expose that is only accessible from inside the cluster
       port: 8080
       # Port to forward to inside the pod
       targetPort: 80
       # Port accessible outisde cluster
+      # nodeport is a port that is accessible from outside the cluster ou seja if i hit my master node 30001 i will be able to hit the targetport no qual esta faz forward para a pod com o nome da app na porta 8080
       nodePort: 30001
-  type: LoadBalancer
+  type: LoadBalancer 
+
 
 ---
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: Deployment # nesta parte está a ser criado um deployment
 metadata: 
-  name: hello-world
-spec:
-  replicas: 5
+  name: hello-world # com o nome de "hello-world"
+spec: # e as especificações são as seguintes: 
+  replicas: 5 # eu quero 5 copias
   template: 
     metadata: 
       labels: 
-        app: hello-world
-    spec:
-      containers: 
-        - name: hello-world
-          image: f3rnand3s/tutum-hello-world
+        app: hello-world # de um aplicação cujo o nome é "hello-world"
+    spec: # no qual vai ter
+      containers:  #um container (essencialmente um array de yml containers?)
+        - name: hello-world #o nome do container vai ser hello-world
+          image: f3rnand3s/tutum-hello-world # em que a imagem vai ser esta (vai fazer pull da imagem do Docker Hub) e vai percorrer essa imagem
           ports:
-            - containerPort: 80
+            - containerPort: 80 #a imagem vai percorrer na porta 80 dentro desse container
